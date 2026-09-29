@@ -193,3 +193,13 @@ can be stated with confidence.
 - [ ] Supervisor's separate next step: simulate a different soil (steeper
       or flatter K(h) / retention curve) and check whether the D3C3 onset
       day shifts, as the g_soil-collapse mechanism predicts
+
+## Application 
+
+
+
+
+
+
+
+      
