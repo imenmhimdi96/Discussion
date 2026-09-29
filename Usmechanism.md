@@ -61,6 +61,19 @@ minute t, with no lag from storage.
 
 ---
 
+
+There is a rhizosphere effect in the function, but not a rhizosphere reservoir: in the function krsoilrootfunction2, the rhizosphere is represented as a resistance. g_soil = B·ksoil(h) is the conductance of the soil 
+right around the root, and d = hT − ψint is the head drop across it. So the rhizosphere is there, and it does something: it makes ψint different from the bulk soil head hT, and the size of that difference (d) depends
+on how much resistance the rhizosphere is currently offering.
+What is not in the function: any water volume or storage term for that zone. The function does not track how much water is currently held in the rhizosphere shell, and it doesn't compute a time derivative for it. 
+ψint at minute t is solved purely from hT(t), S(t) and the conductivity curve at that same minute, with lsqnonlin, an algebraic solver, not a time-stepping one.
+Why the distinction matters for Jan's claim. A storage-based explanation would say: the rhizosphere fills and empties like a small tank, so its head lags and swings because of that filling/emptying dynamic. 
+A resistance-based explanation says: there is no lag at all, ψint responds instantly to whatever S(t) is, and it can be large or small purely because the resistance ratio f is large or small at that instant. 
+Those give different pictures of "why is this fast", and only the second one is what your code does.
+
+So, to directly answer: the rhizosphere is counted, as a resistance whose conductance depends on soil wetness. It is not counted as a reservoir with memory.
+
+
 ## 3. The actual mechanism: g_soil collapses as the soil dries
 
 Rearranging the equation above:
